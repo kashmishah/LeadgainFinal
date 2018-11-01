@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="tests">
+  <test thread-count="5" name="FirstTest">
+    <classes>
+      <class name="com.leadgain1.ForgetPassword"/>
+      <class name="com.leadgain.ExitIntentSeleniumTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
