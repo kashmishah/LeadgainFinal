@@ -18,8 +18,8 @@ public class CampaignPageDelete extends AbstractPage{
   @Value("#{'${xpath.table.rows}'}")
   private String xpathTableRows;
   
-  @Value("#{'${select.campaign.name.delete}'}")
-  private String selectCampaignNameDelete;
+  @Value("#{'${select.campaign.name}'}")
+  private String CampaignName;
   
   @Value("#{'${xpath.delete.popup.msg}'}")
   String xpathDeletePopupMsg;
@@ -32,10 +32,10 @@ public class CampaignPageDelete extends AbstractPage{
   
   public String dashboardClassDelete= "anticon-delete";
   
-  public void verifyCampaignPageDelete(){
+  public void verifyCampaignPageDelete() throws InterruptedException{
     assertAndClick(xpathCampaignBtn);
-    WebElement element = findWebElement(xpathTableRows, selectCampaignNameDelete);
-    System.out.println(selectCampaignNameDelete);
+    WebElement element = findWebElement(xpathTableRows, CampaignName);
+    System.out.println(CampaignName);
     
     
     element.findElement(By.className(dashboardClassDelete)).click();
@@ -44,11 +44,12 @@ public class CampaignPageDelete extends AbstractPage{
     waitForElementVisible(xpathDeleteOk);
     
     assertAndClick(xpathDeleteOk, 0);
+    Thread.sleep(5000);
     pageReady(xpathLoaderDeleteCampaign);
+    pageRefresh();
+    WebElement element1 = findWebElement(xpathTableRows, CampaignName);
     
-    WebElement element1 = findWebElement(xpathTableRows, selectCampaignNameDelete);
-    
-    Assert.assertNull(element1, "Campaign" +selectCampaignNameDelete+ "not deleted");
+    Assert.assertNull(element1, "Campaign" +CampaignName+ "not deleted");
    
   }
   

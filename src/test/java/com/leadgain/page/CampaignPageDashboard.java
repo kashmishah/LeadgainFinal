@@ -31,14 +31,21 @@ public class CampaignPageDashboard extends AbstractPage{
   @Value("#{'${xpath.leadsgen.count}'}")
   String xpathLeadsgenCount;
   
+  @Value("#{'${xpath.logoutbtn}'}")
+  private String xpathLogoutBtn;
+  
   public String dashboardClass= "anticon-line-chart";
   
   public void verifyCampaignPageDashboard(){
-    assertAndClick(xpathCampaignBtn);
+    System.out.println("d1 "+CampaignName);
+  waitForElementVisible(xpathCampaignBtn);
+    System.out.println("d2 "+CampaignName);
+  assertAndClick(xpathCampaignBtn);
+    System.out.println("d3 "+CampaignName);
     WebElement element = findWebElement(xpathTableRows, CampaignName);
-    System.out.println(CampaignName);
+    System.out.println("d4 "+CampaignName);
     element.findElement(By.className(dashboardClass)).click();
-  
+    System.out.println("d5 "+CampaignName);
     waitForElementVisible(xpathVisitor);
     try {
       Thread.sleep(7000);
@@ -56,7 +63,7 @@ public class CampaignPageDashboard extends AbstractPage{
     System.out.println("Total Lead Count:"+ leadCount);
     
     Assert.assertTrue(VisitorCount>=exitIntentCount && exitIntentCount >=leadCount, "Visitor count should be greater than exit intent count and lead count");
-
+    assertAndClick(xpathLogoutBtn);
   
   }
   

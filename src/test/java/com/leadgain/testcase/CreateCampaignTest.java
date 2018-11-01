@@ -53,6 +53,8 @@ public class CreateCampaignTest extends BaseClassTest {
     
     @Autowired
     private   CampaignPageDelete campaignPageDelete;
+    
+    
 
     @Test (priority = 1, groups= {"regression","smoke"}, description="Create Campaign.")
     @Severity(SeverityLevel.BLOCKER)
@@ -61,12 +63,14 @@ public class CreateCampaignTest extends BaseClassTest {
     public void createCampaign(Method method) throws InterruptedException {
       LOGGER.info(method.getName() + " test is starting.");
       createCampaign.gotoUrl(url);
-      ExtentTestManager.getTest().setDescription("Login test and change password.");
+      ExtentTestManager.getTest().setDescription("Create campaign.");
       LOGGER.info("Trying to login LeadGain.");
       createCampaign.verifyLoginWithoutAssert(correctUsername, correctPassword);
       createCampaign.createCamapignMandatoryFields(campaignNameVal, triggerPageUrl, popupContentUrl, existingTitle);
       
-      campaignPageDelete.verifyCampaignPageDelete();
+//      createCampaign.verifyLoginWithoutAssert(correctUsername, correctPassword);
+//      createCampaign.verifyCreatecampaign();
+//      campaignPageDelete.verifyCampaignPageDelete();
     }
    
 //    @Test (priority = 2, groups= {"regression","smoke"}, description="Create Campaign.")

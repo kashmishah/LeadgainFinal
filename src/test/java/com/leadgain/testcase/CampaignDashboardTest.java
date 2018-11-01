@@ -28,14 +28,13 @@ public class CampaignDashboardTest extends BaseClassTest {
   
   @Test (priority = 1, groups= {"regression","smoke"}, description="Check Lead flow")
   @Severity(SeverityLevel.BLOCKER)
-  @Description("Test Description: Check campaign is present and click on leads button of that campaign")
+  @Description("Test Description: Check campaign is present and click on dashboard of that campaign")
   @Story("Check campaign is present")
   public void verifyCampaignIsPresent(Method method) throws InterruptedException {
     LOGGER.info(method.getName() + " test is starting.");
     loginPage.gotoUrl(url);
-    loginPage.verifyLoginWithoutAssert(correctUsername, correctPassword);
+   loginPage.verifyLoginWithoutAssert(correctUsername, correctPassword);
     campaignPageDashboard.verifyCampaignPageDashboard();
     Thread.sleep(6000);
- //   campaignPage.verifySubmittedLead();
   }
 }

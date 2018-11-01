@@ -4,6 +4,7 @@ import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver.Window;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -234,6 +235,12 @@ public class CreateCampaignPage extends AbstractPage {
     @Value("#{'${xpath.loader.delete.campaign}'}")
     String xpathLoaderDeleteCampaign;
     
+    @Value("#{'${xpath.dashboard.button}'}")
+    private String xpathDashboardButton;
+    
+    @Value("#{'${xpath.logoutbtn}'}")
+    private String xpathLogoutBtn;
+    
     public String dashboardClassDelete= "anticon-delete";
     
     public void verifyLoginWithoutAssert(String username, String password) {
@@ -249,35 +256,70 @@ public class CreateCampaignPage extends AbstractPage {
       while(staleElement){
         try {
         assertAndClick(xpathCampaignBtn);
+        waitForElementVisible(xpathLoadercreatecampaign);
         pageReady(xpathLoadercreatecampaign);
+        waitForElementVisible(xpathCreateCampaignBtn);
+        Thread.sleep(5000);
         assertAndClick(xpathCreateCampaignBtn, 0);
+        Thread.sleep(5000);
+        waitForElementVisible(xpathLoadercreatecampaign);
         waitForElementVisible(xpathCampaignName);
         assertAndSendKeys(xpathCampaignName, campaignname, 0);
         assertAndClick(xpathType);
+        waitForElementVisible(xpathSelectType);
         assertAndClick(xpathSelectType, 0);
         assertAndSendKeys(xpathCampaignUrl, campaignurl);
         assertAndSendKeys(xpathPopupUrl, popupurl);
         assertAndSendKeys(xpathTitle, title);
         assertAndClick(xpathCreateBtn, 0);
+        staleElement = false;
         pageReady(xpathLoaderCampaign);
         assertAndClick(xpathStartCampaignBtn, 0);
-        pageReady(xpathLoaderCampaignStrt);
+        System.out.println("1 "+campaignName);
+       // pageReady(xpathLoaderCampaignStrt);
+        Thread.sleep(40000);
+        System.out.println("2 "+campaignName);
+        // waitForDOMReady();
         
-        waitForDOMReady();
-        Thread.sleep(7000);
+       
         
         assertAndClick(xpathCampaignBtn);
+        System.out.println("3 "+campaignName);
+        pageReady(xpathLoadercreatecampaign);
+        pageRefresh();
+        
         WebElement element = findWebElement(xpathTableRows, campaignName);
-        System.out.println(campaignName);
+        System.out.println("4 "+campaignName);
+        System.out.println(campaignName +" : "+ element);
+//        
+        Assert.assertNotNull(element, "Campaign : " +campaignName+ " not created successfully");
+        System.out.println("5 "+campaignName);
         
-        Assert.assertNotNull(element, "Campaign" +campaignName+ "not created successfully");
+        assertAndClick(xpathLogoutBtn);
         
-        staleElement = false;
         }catch(StaleElementReferenceException e) {
-          staleElement = true;
+          e.printStackTrace();
+          System.out.println("e "+campaignName);
+//          staleElement = true;
         }
       }
       }
+    
+//    public void verifyCreatecampaign() throws InterruptedException {
+//      
+//      assertAndClick(xpathCampaignBtn);
+//      System.out.println("3 "+campaignName);
+//      pageReady(xpathLoadercreatecampaign);
+//      pageRefresh();
+//      WebElement element = findWebElement(xpathTableRows, campaignName.trim());
+//      Thread.sleep(6000);
+//      System.out.println("4 "+campaignName);
+//      System.out.println(campaignName +" : "+ element);
+////      
+//      Assert.assertNotNull(element, "Campaign : " +campaignName+ " not created successfully");
+//      System.out.println("5 "+campaignName);
+//      assertAndClick(xpathLogoutBtn);
+//    }
      
     public void createCamapignAdvanceManageMsg (String campaignname,String campaignurl, String popupurl, String title) throws InterruptedException {
       

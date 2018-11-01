@@ -192,7 +192,13 @@ public class AbstractPage<T> {
     public boolean pageReady(String locator) {
       boolean pageReady = false;
       while (!pageReady) {
-        if(!isElementVisible(locator)) {
+//        System.out.println("inside page ready");
+        try {
+          if(!isElementVisible(locator)) {
+            pageReady=true;
+          }
+        }catch(StaleElementReferenceException e) {
+          e.printStackTrace();
           pageReady=true;
         }
       }
@@ -322,5 +328,9 @@ public class AbstractPage<T> {
       System.out.println("after assert");
       return count;
 
+    }
+    
+    public void pageRefresh() {
+      webDriver.navigate().refresh();
     }
 }

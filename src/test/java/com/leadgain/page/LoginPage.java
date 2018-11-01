@@ -124,6 +124,12 @@ public class LoginPage extends AbstractPage {
       assertAndClick(xpathLogoutBtn);
       assertAndVerifyCurrentUrlNotEqual(url);
     }
+    
+    public void logout() {
+    
+      assertAndClick(xpathLogoutBtn);
+    
+    }
 
 
 }
