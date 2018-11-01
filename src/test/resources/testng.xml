@@ -5,11 +5,13 @@
      <test thread-count="5" name="FirstTest">
     <classes> 
      	<class name="com.leadgain.testcase.CreateCampaignTest"/>
-     	 <class name="com.leadgain.testcase.CampaignDashboardTest"/> 
- 		<class name="com.leadgain.testcase.CampaignDeleteTest"/> 
+     	
      </classes> 
     
   <!--   <classes>
+   <class name="com.leadgain.testcase.CampaignDashboardTest"/> 
+ 		<class name="com.leadgain.testcase.CampaignDeleteTest"/> 
+  
     <class name="com.leadgain.testcase.DemoTest"/>
     </classes> -->
     
