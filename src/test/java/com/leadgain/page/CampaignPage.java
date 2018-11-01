@@ -31,10 +31,13 @@ public class CampaignPage extends AbstractPage{
   @Value("#{'${correct.emailfield.value}'}")
   String correctEmailFieldVal;
  
-  @Value("#{'${xpath.loader.stopcamapign}'}")
+  @Value("#{'${xpath.loader.campaign}'}")
+  String xpathLoaderCampaign;
+  
+  @Value("#{'${xpath.loader.stopcamapign.state}'}")
   String xpathLoaderPauseCampaign;
   
-  @Value("#{'${xpath.loader.startcamapign}'}")
+  @Value("#{'${xpath.loader.startcamapign.state}'}")
   String xpathLoaderStartCampaign;
   
   public void verifyCampaignPresent(String campaignName){
@@ -68,7 +71,7 @@ public class CampaignPage extends AbstractPage{
    
    public void goToCampaignMenu() {
      // TODO Auto-generated method stub
-     assertAndClick(xpathCampaignBtn);
+     assertAndClick(xpathCampaignBtn);    
    }
    
    public void changeCampaignState(String campaignName, String state) {

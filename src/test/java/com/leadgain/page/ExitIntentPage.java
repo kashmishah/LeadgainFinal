@@ -66,7 +66,7 @@ public class ExitIntentPage extends AbstractPage {
       windowFocus(xpathIframe);
       System.out.println("before click");
       waitForElementInVisible(xpathInitLoaderDiv);
-      pageReady(xpathDownloadBtn);
+//      pageReady(xpathDownloadBtn);
       assertAndClick(xpathDownloadBtn);
       System.out.println("after click");
       System.out.println("after focus:");
@@ -82,7 +82,7 @@ public class ExitIntentPage extends AbstractPage {
     public void veifyScrollPagePdf() {
       // TODO Auto-generated method stub
       System.out.println("before find");
-      pageReady(xpathPdfLoader);
+      waitForElementVisible(xpathPdfLoader);
      // waitForElementInVisible(xpathPdfLoader);
       System.out.println("after found");
       scrollPage(5);

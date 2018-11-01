@@ -55,7 +55,7 @@ public class DemoTest extends BaseClassTest {
   @Value("#{'${select.campaign.name.for.prod}'}")
   private String campaignName;
   
-  @Test (priority = 0, groups= {"smoke"}, description="Demo url verifying and click on button")
+  @Test (priority = 0, groups= {"Functional","Sanity","smoke","regression"}, description="Demo url verifying and click on button")
   @Severity(SeverityLevel.BLOCKER)
   @Description("Test Description: Demo url verification and click on learnmore button.")
   public void demoUrlTest (Method method) throws InterruptedException {
@@ -86,7 +86,7 @@ public class DemoTest extends BaseClassTest {
     demoPage.verifyLearnmoreButtonClick();
 }
   
-  @Test (priority = 1, groups= {"smoke"}, description="Check ExitIntentPopup is displayed")
+  @Test (priority = 1, groups= {"smoke","Black Box"}, description="Check ExitIntentPopup is displayed")
   @Severity(SeverityLevel.BLOCKER)
   @Description("Test Description: Dispaly ExitIntentPopup")
   public void checkExitIntentPopup() throws InterruptedException, AWTException {
@@ -95,7 +95,7 @@ public class DemoTest extends BaseClassTest {
     exitintentPage.verifyExitPopupIsDisplayed();
   }
   
-  @Test (priority = 2, groups= {"smoke"}, description="Verify download button click")
+  @Test (priority = 2, groups= {"1.Functional","Sanity"}, description="Verify download button click")
   @Severity(SeverityLevel.BLOCKER)
   @Description("Test Description:Check for Download button is clickable")
   public void checkDowonloadButtonClick() throws InterruptedException, AWTException {
@@ -104,16 +104,16 @@ public class DemoTest extends BaseClassTest {
     exitintentPage.verifyDownloadButtonClick();
   }
   
-  @Test (priority = 3, groups= {"smoke"}, description="Valid Submit lead Scenario with emailfield value")
+  @Test (priority = 3, groups= {"Functional","regression"}, description="Valid Submit lead Scenario with emailfield value")
   @Severity(SeverityLevel.BLOCKER)
   @Description("Test Description:submit lead value with correct emailfield")
-  public void checkForValidLead() throws InterruptedException, AWTException {
+  public void ValidLeadSubmitLead_ValidEmailId() throws InterruptedException, AWTException {
 
     LOGGER.info("Trying to Submit Lead");
     exitintentPage.verifyAndSubmitEmail(correctEmailFieldVal);
   
   }
-  @Test (priority = 4, groups= {"smoke"}, description="Verify scrollpage of the pdf")
+  @Test (priority = 4, groups= {"Black Box"}, description="Verify scrollpage of the pdf")
   @Severity(SeverityLevel.BLOCKER)
   @Description("Test Description:Verify scrollpage of the pdf")
   public void checkForScrollPage() throws InterruptedException, AWTException {
@@ -122,15 +122,15 @@ public class DemoTest extends BaseClassTest {
     exitintentPage.veifyScrollPagePdf();
   
   }
-  @Test (priority = 5, groups= {"smoke"}, description="login to application")
+  @Test (priority = 5, groups= {"Functional","Sanity","smoke","regression"}, description="login to application")
   @Severity(SeverityLevel.BLOCKER)
   @Description("Test Description: Login to application.")
   public void goToLogin() throws InterruptedException, AWTException{
     loginPage.gotoUrl(url);
-    loginPage.verifyLogin(demoUsername, demoPassword);
+    loginPage.verifyLoginWithoutAssert(demoUsername, demoPassword);
   }
   
-  @Test (priority = 6, groups= {"smoke"}, description="Click on campaign button and go to campaign list.")
+  @Test (priority = 6, groups= {"Functional","Sanity","regression"}, description="Click on campaign button and go to campaign list.")
   @Severity(SeverityLevel.BLOCKER)
   @Description("Test Description: click on campaign menu ,campaign list")
    public void goToCampaignsList() throws InterruptedException, AWTException{
@@ -138,7 +138,7 @@ public class DemoTest extends BaseClassTest {
      campaignPage.verifyCampaignPresent(campaignName);
   }
 
-  @Test (priority = 7, groups= {"smoke"}, description="Click on campaign button and go to campaign list.")
+  @Test (priority = 7, groups= {"Functional","Sanity","regression"}, description="Click on campaign button and go to campaign list.")
   @Severity(SeverityLevel.BLOCKER)
   @Description("Test Description: click on campaign menu ,campaign list")
   public void goToLeadsPage()throws InterruptedException, AWTException{
@@ -146,10 +146,10 @@ public class DemoTest extends BaseClassTest {
     
   }
 
-  @Test (priority = 8, groups= {"smoke"}, description="Check submitted lead is present on leads page.")
+  @Test (priority = 8, groups= {"Black Box"}, description="Check submitted lead is present on leads page.")
   @Severity(SeverityLevel.BLOCKER)
   @Description("Test Description: ")
-  public void checkLead() {
+  public void checkForLeadSubmittedIsPresent() throws InterruptedException {
    // pageReady
     leadPage.verifySubmittedLead();
   }

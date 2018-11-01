@@ -3,13 +3,16 @@
 <suite name="Suite">
   
      <test thread-count="5" name="FirstTest">
-    <classes>
+<!--     <classes> -->
+<!--     	<class name="com.leadgain.testcase.CreateCampaignTest"/> -->
+<!--     	 <class name="com.leadgain.testcase.CampaignDashboardTest"/> -->
+<!-- 		<class name="com.leadgain.testcase.CampaignDeleteTest"/> -->
+<!--     </classes> -->
     
-    	<class name="com.leadgain.testcase.CreateCampaignTest"/>
-    	 <class name="com.leadgain.testcase.CampaignDashboardTest"/>
-		<class name="com.leadgain.testcase.CampaignDeleteTest"/>
-     
+    <classes>
+    <class name="com.leadgain.testcase.DemoTest"/>
     </classes>
+    
   </test> <!-- Test -->
 </suite> <!-- Suite -->
 
