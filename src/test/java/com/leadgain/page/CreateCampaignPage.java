@@ -271,6 +271,8 @@ public class CreateCampaignPage extends AbstractPage {
         assertAndSendKeys(xpathCampaignUrl, campaignurl);
         assertAndSendKeys(xpathPopupUrl, popupurl);
         assertAndSendKeys(xpathTitle, title);
+		Thread.sleep(3000);
+        waitForElementVisible(xpathCreateBtn);
         assertAndClick(xpathCreateBtn, 0);
         staleElement = false;
         pageReady(xpathLoaderCampaign);
