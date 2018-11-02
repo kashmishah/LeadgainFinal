@@ -244,6 +244,11 @@ public class AbstractPage<T> {
           elements.get(arrayIndex).click();
     }
     
+    public void assertAndClickByCss(String cssClass) {
+      System.out.println("Hemal :: found");
+      webDriver.findElement(By.cssSelector(cssClass)).click();;
+    }
+    
     public void assertAndClear(String locator, int arrayIndex) {
       System.out.println("inside clear");
       boolean staleElement = true; 
