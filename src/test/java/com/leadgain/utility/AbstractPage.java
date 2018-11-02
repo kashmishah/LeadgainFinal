@@ -230,7 +230,9 @@ public class AbstractPage<T> {
     public void assertAndClick(String locator, int arrayIndex) {
      
           assertElementPresentByXpath(locator);
+          System.out.println("Hemal :: found");
           List<WebElement> elements = webDriver.findElements(By.xpath(locator));
+          System.out.println("Hemal ::"+elements.get(arrayIndex));
           elements.get(arrayIndex).click();
     }
     
