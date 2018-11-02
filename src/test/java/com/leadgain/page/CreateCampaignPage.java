@@ -288,6 +288,8 @@ public class CreateCampaignPage extends AbstractPage {
         System.out.println("step 14");
         assertAndSendKeys(xpathTitle, title);
         System.out.println("step 15");
+        waitForDOMReady();
+        waitForElementVisible(xpathCreateBtn);
         assertAndClick(xpathCreateBtn, 0);
         System.out.println("step 16");
         staleElement = false;
