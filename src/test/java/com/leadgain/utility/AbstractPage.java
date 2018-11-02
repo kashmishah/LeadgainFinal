@@ -238,6 +238,9 @@ public class AbstractPage<T> {
           System.out.println("Hemal :: found");
           List<WebElement> elements = webDriver.findElements(By.xpath(locator));
           System.out.println("Hemal ::"+elements.get(arrayIndex));
+          waitForElementClickable(locator);
+//          elements.get(arrayIndex).getLocation().
+//          new Actions(webDriver).moveToElement(elements.get(arrayIndex)).moveByOffset(0 , -100).click().perform();
           elements.get(arrayIndex).click();
     }
     

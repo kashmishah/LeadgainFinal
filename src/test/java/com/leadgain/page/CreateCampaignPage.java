@@ -292,9 +292,9 @@ public class CreateCampaignPage extends AbstractPage {
         System.out.println("step 15");
         List<WebElement> elements = webDriver.findElements(By.xpath(xpathCreateBtn));
         System.out.println("Hemal ::"+elements.get(0));
-        new Actions(webDriver).moveToElement(elements.get(0)).moveByOffset(0 , -100).click().perform();
+//        new Actions(webDriver).moveToElement(elements.get(0)).moveByOffset(0 , -100).click().perform();
 //        waitForElementClickable(xpathCreateBtn);
-//        assertAndClick(xpathCreateBtn, 0);
+        assertAndClick(xpathCreateBtn, 0);
         
         System.out.println("step 16");
         staleElement = false;
