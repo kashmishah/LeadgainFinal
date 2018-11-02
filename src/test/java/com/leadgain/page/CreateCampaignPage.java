@@ -2,9 +2,11 @@ package com.leadgain.page;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
+import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver.Window;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -288,8 +290,9 @@ public class CreateCampaignPage extends AbstractPage {
         System.out.println("step 14");
         assertAndSendKeys(xpathTitle, title);
         System.out.println("step 15");
-        waitForDOMReady();
-        webDriver.manage().window().maximize();
+        List<WebElement> elements = webDriver.findElements(By.xpath(xpathCreateBtn));
+        System.out.println("Hemal ::"+elements.get(0));
+        new Actions(webDriver).moveToElement(elements.get(0)).moveByOffset(0 , -100).click().perform();
         waitForElementClickable(xpathCreateBtn);
         assertAndClick(xpathCreateBtn, 0);
         
