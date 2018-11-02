@@ -291,7 +291,7 @@ public class CreateCampaignPage extends AbstractPage {
         waitForDOMReady();
         webDriver.manage().window().maximize();
         waitForElementVisible(xpathCreateBtn);
-        Thread.sleep(5000);
+        Thread.sleep(30000); 
         assertAndClick(xpathCreateBtn, 0);
         
         System.out.println("step 16");
