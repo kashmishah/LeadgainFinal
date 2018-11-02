@@ -289,8 +289,11 @@ public class CreateCampaignPage extends AbstractPage {
         assertAndSendKeys(xpathTitle, title);
         System.out.println("step 15");
         waitForDOMReady();
+        webDriver.manage().window().maximize();
         waitForElementVisible(xpathCreateBtn);
+        Thread.sleep(5000);
         assertAndClick(xpathCreateBtn, 0);
+        
         System.out.println("step 16");
         staleElement = false;
         pageReady(xpathLoaderCampaign);
