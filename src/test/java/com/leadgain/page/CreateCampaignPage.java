@@ -16,6 +16,8 @@ import com.leadgain.utility.AbstractPage;
 @Component
 public class CreateCampaignPage extends AbstractPage {
   
+//  public static Logger loggger =
+  
   @Value("#{'${xpath.username}'}")
   private String xpathUsername;
   
@@ -255,28 +257,44 @@ public class CreateCampaignPage extends AbstractPage {
       boolean staleElement = true; 
       while(staleElement){
         try {
+          System.out.println("step 1");
         assertAndClick(xpathCampaignBtn);
+        System.out.println("step 2");
         waitForElementVisible(xpathLoadercreatecampaign);
+        System.out.println("step 3");
         pageReady(xpathLoadercreatecampaign);
+        System.out.println("step 4");
         waitForElementVisible(xpathCreateCampaignBtn);
+        System.out.println("step 5");
         Thread.sleep(5000);
         assertAndClick(xpathCreateCampaignBtn, 0);
+        System.out.println("step 6");
         Thread.sleep(5000);
         waitForElementVisible(xpathLoadercreatecampaign);
+        System.out.println("step 7");
         waitForElementVisible(xpathCampaignName);
+        System.out.println("step 8");
         assertAndSendKeys(xpathCampaignName, campaignname, 0);
+        System.out.println("step 9");
         assertAndClick(xpathType);
+        System.out.println("step 10");
         waitForElementVisible(xpathSelectType);
+        System.out.println("step 11");
         assertAndClick(xpathSelectType, 0);
+        System.out.println("step 12");
         assertAndSendKeys(xpathCampaignUrl, campaignurl);
+        System.out.println("step 13");
         assertAndSendKeys(xpathPopupUrl, popupurl);
+        System.out.println("step 14");
         assertAndSendKeys(xpathTitle, title);
-		Thread.sleep(3000);
-        waitForElementVisible(xpathCreateBtn);
+        System.out.println("step 15");
         assertAndClick(xpathCreateBtn, 0);
+        System.out.println("step 16");
         staleElement = false;
         pageReady(xpathLoaderCampaign);
+        System.out.println("step 17");
         assertAndClick(xpathStartCampaignBtn, 0);
+        System.out.println("step 18");
         System.out.println("1 "+campaignName);
        // pageReady(xpathLoaderCampaignStrt);
         Thread.sleep(40000);
@@ -286,10 +304,11 @@ public class CreateCampaignPage extends AbstractPage {
        
         
         assertAndClick(xpathCampaignBtn);
+        System.out.println("step 19");
         System.out.println("3 "+campaignName);
         pageReady(xpathLoadercreatecampaign);
         pageRefresh();
-        
+        System.out.println("step 20");
         WebElement element = findWebElement(xpathTableRows, campaignName);
         System.out.println("4 "+campaignName);
         System.out.println(campaignName +" : "+ element);
