@@ -296,7 +296,10 @@ public class CreateCampaignPage extends AbstractPage {
 //        waitForElementClickable(xpathCreateBtn);
         
 //        assertAndClick(xpathCreateBtn, 0);
-        assertAndClickByCss("button[class='ant-btn ant-btn-primary ant-btn-lg']");
+        
+        webDriver.findElement(By.cssSelector("button[class='ant-btn ant-btn-primary ant-btn-lg']")).click();
+        
+       // assertAndClickByCss("button[class='ant-btn ant-btn-primary ant-btn-lg']");
         
         System.out.println("step 16");
         staleElement = false;
