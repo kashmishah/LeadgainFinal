@@ -302,6 +302,7 @@ public class CreateCampaignPage extends AbstractPage {
        // assertAndClickByCss("button[class='ant-btn ant-btn-primary ant-btn-lg']");
         
         System.out.println("step 16");
+		Thread.sleep(15000);
         staleElement = false;
         pageReady(xpathLoaderCampaign);
         System.out.println("step 17");
