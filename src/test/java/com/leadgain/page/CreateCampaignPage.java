@@ -294,10 +294,10 @@ public class CreateCampaignPage extends AbstractPage {
 //        System.out.println("Hemal ::"+elements.get(0));
 //        new Actions(webDriver).moveToElement(elements.get(0)).moveByOffset(0 , -100).click().perform();
 //        waitForElementClickable(xpathCreateBtn);
+        scrollPage(5);
+      assertAndClick(xpathCreateBtn, 0);
         
-//        assertAndClick(xpathCreateBtn, 0);
-        
-        webDriver.findElement(By.cssSelector("button[class='ant-btn ant-btn-primary ant-btn-lg']")).click();
+    //    webDriver.findElement(By.cssSelector("button[class='ant-btn ant-btn-primary ant-btn-lg']")).click();
         
        // assertAndClickByCss("button[class='ant-btn ant-btn-primary ant-btn-lg']");
         
