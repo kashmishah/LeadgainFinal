@@ -48,12 +48,14 @@ public class CampaignPageDashboard extends AbstractPage{
     System.out.println("d5 "+CampaignName);
     
     try {
-      Thread.sleep(7000);
+      Thread.sleep(10000);
     } catch (InterruptedException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
-	waitForElementVisible(xpathVisitor);
+	 System.out.println("d6 "+CampaignName);
+    
+	//waitForElementVisible(xpathVisitor);
     int VisitorCount= assertAndClickGetText(xpathVisitor, 0);
     System.out.println("Total Visitor:"+VisitorCount);
     
