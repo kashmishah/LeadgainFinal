@@ -42,6 +42,8 @@ public class CampaignPageDashboard extends AbstractPage{
     System.out.println("d2 "+CampaignName);
   assertAndClick(xpathCampaignBtn);
     System.out.println("d3 "+CampaignName);
+	 pageReady(xpathLoadercreatecampaign);
+        pageRefresh();
     WebElement element = findWebElement(xpathTableRows, CampaignName);
     System.out.println("d4 "+CampaignName);
    element.findElement(By.className(dashboardClass)).click();
