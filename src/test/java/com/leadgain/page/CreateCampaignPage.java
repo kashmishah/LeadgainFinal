@@ -310,7 +310,7 @@ public class CreateCampaignPage extends AbstractPage {
        assertAndClick(xpathStartCampaignBtn, 0);
         System.out.println("step 18");
         System.out.println("1 "+campaignName);
-       pageReady(xpathLoaderCampaignStrt);
+      // pageReady(xpathLoaderCampaignStrt);
       Thread.sleep(40000);
        System.out.println("2 "+campaignName);
         waitForDOMReady();
