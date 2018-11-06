@@ -1,163 +1,646 @@
-package com.leadgain.testcase;
+package com.leadgain.page;
 
-import java.lang.reflect.Method;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver.Window;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.WebElement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
-import com.leadgain.extent.ExtentTestManager;
-import com.leadgain.listener.TestListener;
-import com.leadgain.page.CampaignPageDelete;
-import com.leadgain.page.ChangePasswordPage;
-import com.leadgain.page.CreateCampaignPage;
-import com.leadgain.page.LoginPage;
-import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
-import io.qameta.allure.Story;
+import org.springframework.stereotype.Component;
+import org.testng.Assert;
+import com.leadgain.email.User;
+import com.leadgain.utility.AbstractPage;
 
-@Listeners({ TestListener.class })
-@Epic("Regression Tests")
-@Feature("Login Tests")
-public class CreateCampaignTest extends BaseClassTest {
+@Component
+public class CreateCampaignPage extends AbstractPage {
+  
+//  public static Logger loggger =
+  
+  @Value("#{'${xpath.username}'}")
+  private String xpathUsername;
+  
+  @Value("#{'${xpath.password}'}")
+  private String xpathPassword;
+  
+  @Value("#{'${xpath.loginbtn}'}")
+  private String xpathLoginBtn;
 
-      
+    @Value("#{'${xpath.campaignbtn}'}")
+    private String xpathCampaignBtn;
+    
+    @Value("#{'${xpath.createcampaignbtn}'}")
+    private String xpathCreateCampaignBtn;
+    
+    @Value("#{'${xpath.campaignname}'}")
+    private String xpathCampaignName;
+    
+    @Value("#{'${xpath.type}'}")
+    private String xpathType;
+    
+    @Value("#{'${xpath.selecttype}'}")
+    private String xpathSelectType;
+    
+    @Value("#{'${xpath.campaignurl}'}")
+    private String xpathCampaignUrl;
+    
+    @Value("#{'${xpath.popupurl}'}")
+    private String xpathPopupUrl;
+    
+    @Value("#{'${xpath.title}'}")
+    private String xpathTitle;
+    
+    @Value("#{'${xpath.roi}'}")
+    private String xpathRoi;
+    
+    @Value("#{'${xpath.description}'}")
+    private String xpathDescription;
+    
+    @Value("#{'${xpath.campaignmail}'}")
+    private String xpathCampaignMail;
+    
+    @Value("#{'${xpath.createbtn}'}")
+    private String xpathCreateBtn;
+    
+    @Value("#{'${xpath.cancelbutton}'}")
+    private String xpathCancelButton;
+    
+    @Value("#{'${xpath.loader}'}")
+    String xpathLoader;
+    
+    @Value("#{'${xpath.loader.createcampaign}'}")
+    String xpathLoadercreatecampaign;
+    
+    @Value("#{'${xpath.loader.campaign}'}")
+    String xpathLoaderCampaign;
+    
+    @Value("#{'${xpath.startcampaignbtn}'}")
+    String xpathStartCampaignBtn;
+    
+    @Value("#{'${xpath.loader.campaignstart}'}")
+    String xpathLoaderCampaignStrt;
+    
+    @Value("#{'${xpath.delete.campaign}'}")
+    String xpathDeleteCampaign;
+    
     @Value("#{'${campaign.campaignnamevalue}'}")
-    String campaignNameVal;
-  
-    @Value("#{'${campaign.trigger.page.url.value}'}")
-    String triggerPageUrl;
+    String campaignName;
     
-    @Value("#{'${campaign.popup.content.url.value}'}")
-    String popupContentUrl;
+    @Value("#{'${xpath.delete.button}'}")
+    String xpathDeleteBtn;
     
-    @Value("#{'${campaign.existing.title.value}'}")
-    String existingTitle;
+    @Value("#{'${xpath.adv}'}")
+    String xpathAdvWindow;
     
-    @Value("#{'${campaign.existing.roi.value}'}")
-    String existingRoi;
+    @Value("#{'${xpath.msg.heading}'}")
+    String xpathAdvMsgHeading;
     
-    @Value("#{'${campaign.description.value}'}")
-    String campaignDescription;
-  
-    @Value("#{'${correct.username}'}")
-    String correctUsername;
+    @Value("#{'${create.campaign.splashheading.val}'}")
+    String campaignSplashheadingVal;
     
-    @Value("#{'${correct.password}'}")
-    String correctPassword;
+    @Value("#{'${xpath.msg.subheading}'}")
+    String xpathAdvMsgSubHeading;
     
-    @Autowired
-    private CreateCampaignPage createCampaign;
+    @Value("#{'${create.campaign.splashsubheading.val}'}")
+    String campaignSplashSubheadingVal;
     
-    @Autowired
-    private   CampaignPageDelete campaignPageDelete;
+    @Value("#{'${xpath.email.heading}'}")
+    String xpathEmailHeading;
     
+    @Value("#{'${create.campaign.emailboxheading.val}'}")
+    String campaignEmailboxHeadingVal;
     
+    @Value("#{'${xpath.email.subheading}'}")
+    String xpathEmailSubHeading;
+    
+    @Value("#{'${create.campaign.emailboxsubheading.val}'}")
+    String campaignEmailboxSubHeadingVal;
+    
+    @Value("#{'${xpath.email.on}'}")
+    String xpathEmailOn;
+    
+    @Value("#{'${create.campaign.thanksmsgmailon.val}'}")
+    String campaignThanksEmailOn;
+    
+    @Value("#{'${xpath.email.off}'}")
+    String xpathEmailOff;
+    
+    @Value("#{'${create.campaign.thanksmsgmailoff.val}'}")
+    String campaignThanksEmailoff;
+    
+    @Value("#{'${xpath.manageteaser}'}")
+    String xpathManageTeaser;
+    
+    @Value("#{'${xpath.teaser.page.slide}'}")
+    String xpathPageForSlide;   
+    
+    @Value("#{'${manage.teaser.slide}'}")
+    String manageTeaserSlide;
+    
+    @Value("#{'${xpath.teaser.add.more.slide}'}")
+    String xpathTeaserAddMoreSlide;
+    
+    @Value("#{'${xpath.teaser.page.new.slide}'}")
+    String xpathManageTeaserPageNewSlide;
+    
+    @Value("#{'${xpath.teaser.slide.3}'}")
+    String xpathTeaserSlide3;
+    
+    @Value("#{'${xpath.teaser.key.up}'}")
+    String xpathTeaserKeyUp;
 
-    @Test (priority = 1, groups= {"regression","smoke"}, description="Create Campaign.")
-    @Severity(SeverityLevel.BLOCKER)
-    @Description("Create Campaign")
-    @Story("Create Campaign")
-    public void createCampaign(Method method) throws InterruptedException {
-      LOGGER.info(method.getName() + " test is starting.");
-      createCampaign.gotoUrl(url);
-      ExtentTestManager.getTest().setDescription("Create campaign.");
-      LOGGER.info("Trying to login LeadGain.");
-      createCampaign.verifyLoginWithoutAssert(correctUsername, correctPassword);
-      createCampaign.createCamapignMandatoryFields(campaignNameVal, triggerPageUrl, popupContentUrl, existingTitle);
+    @Value("#{'${xpath.slide.key.down}'}")
+    String xpathSlideKeyDown;
+    
+    @Value("#{'${xpath.add.new.slide}'}")
+    String xpathAddNewSlide;
+    
+    @Value("#{'${xpath.teaser.slide.4}'}")
+    String xpathTeaserSlide4;
+    
+    @Value("#{'${xpath.teaser.remove.btn}'}")
+    String xpathTeaserRemoveBtn;
+    
+    @Value("#{'${xpath.teaser.manage.question}'}")
+    String xpathTeaserManageQs;
+    
+    @Value("#{'${xpath.teaser.add.question.button}'}")
+    String xpathTeaserAddQuestionButton;
+    
+    @Value("#{'${xpath.manageqs.qs.text}'}")
+    String xpathManageqsQsText;
+    
+    @Value("#{'${enter.question1.text.val}'}")
+    String enterQuestion1TextVal;
+    
+    @Value("#{'${xpath.option1}'}")
+    String xpathOption1;
+    
+    @Value("#{'${question1.answer.option-1.val}'}")
+    String question1AnswerOption1Val;
+    
+    @Value("#{'${xpath.opt2.add.option}'}")
+    String xpathOpt2AddOption;
+    
+    @Value("#{'${question1.answer.option-2.val}'}")
+    String question1AnswerOption2Val;
+    
+    @Value("#{'${xpath.option2}'}")
+    String xpathOption2;
+    
+    @Value("#{'${xpath.opt3.add.option}'}")
+    String xpathOpt3AddOption;
+    
+    @Value("#{'${question1.answer.option-3.val}'}")
+    String question1AnswerOption3Val;
+    
+    @Value("#{'${xpath.option3}'}")
+    String xpathOption3;
+    
+    @Value("#{'${xpath.opt4.add.option}'}")
+    String xpathOpt4AddOption;
+    
+    @Value("#{'${xpath.opt4.del.btn}'}")
+    String xpathOpt4DelBtn;
+    
+    @Value("#{'${xpath.add.btn}'}")
+    String xpathAddBtn;
+    
+    @Value("#{'${xpath.select.qs.type}'}")
+    String xpathSelectQsType;
+    
+    @Value("#{'${xpath.select.radio.btn}'}")
+    String xpathSelectRadioBtn;
+    
+    @Value("#{'${xpath.adv.automation.settings}'}")
+    String xpathAdvAutomationSettings;
+    
+    @Value("#{'$xpath.lead.qualification}'}")
+    String xpathLeadQualification;
+    
+    @Value("#{'${xpath.marketing.automation}'}")
+    String xpathMarketingAutomation;
+    
+    @Value("#{'${xpath.instant.marketing.automation}'}")
+    String xpathInstantMarketingAutomation;
+    
+    @Value("#{'${xpath.table.rows}'}")
+    private String xpathTableRows;
+    
+    @Value("#{'${xpath.delete.popup.msg}'}")
+    String xpathDeletePopupMsg;
+    
+    @Value("#{'${xpath.delete.ok}'}")
+    String xpathDeleteOk;
+    
+    @Value("#{'${xpath.loader.delete.campaign}'}")
+    String xpathLoaderDeleteCampaign;
+    
+    @Value("#{'${xpath.dashboard.button}'}")
+    private String xpathDashboardButton;
+    
+    @Value("#{'${xpath.logoutbtn}'}")
+    private String xpathLogoutBtn;
+    
+    public String dashboardClassStart= "anticon-play-circle-o";
+    
+    public void verifyLoginWithoutAssert(String username, String password) {
+      // String url=webDriver.getCurrentUrl();
+       assertAndSendKeys(xpathUsername, username);
+       assertAndSendKeys(xpathPassword, password);
+       assertAndClick(xpathLoginBtn);
+                           
+   }
+    
+    public void createCamapignMandatoryFields (String campaignname,String campaignurl, String popupurl, String title) throws InterruptedException {
+      boolean staleElement = true; 
+      while(staleElement){
+        try {
+          System.out.println("step 1");
+        assertAndClick(xpathCampaignBtn);
+        System.out.println("step 2");
+        waitForElementVisible(xpathLoadercreatecampaign);
+        System.out.println("step 3");
+        pageReady(xpathLoadercreatecampaign);
+        System.out.println("step 4");
+        waitForElementVisible(xpathCreateCampaignBtn);
+        System.out.println("step 5");
+        Thread.sleep(5000);
+        assertAndClick(xpathCreateCampaignBtn, 0);
+        System.out.println("step 6");
+        Thread.sleep(5000);
+        waitForElementVisible(xpathLoadercreatecampaign);
+        System.out.println("step 7");
+        waitForElementVisible(xpathCampaignName);
+        System.out.println("step 8");
+        assertAndSendKeys(xpathCampaignName, campaignname, 0);
+        System.out.println("step 9");
+        assertAndClick(xpathType);
+        System.out.println("step 10");
+        waitForElementVisible(xpathSelectType);
+        System.out.println("step 11");
+        assertAndClick(xpathSelectType, 0);
+        System.out.println("step 12");
+        assertAndSendKeys(xpathCampaignUrl, campaignurl);
+        System.out.println("step 13");
+        assertAndSendKeys(xpathPopupUrl, popupurl);
+        System.out.println("step 14");
+        assertAndSendKeys(xpathTitle, title);
+        System.out.println("step 15");
+        scrollPage(5);
+      assertAndClick(xpathCreateBtn, 0);
+        
+        System.out.println("step 16");
+        Thread.sleep(15000);
+        staleElement = false;
+        pageReady(xpathLoaderCampaign);
+        System.out.println("step 17");
+        Thread.sleep(5000);
+        
+      //  assertAndClick(xpathStartCampaignBtn, 0);
+       // System.out.println("step 18");
+       // System.out.println("1 "+campaignName);
+       // pageReady(xpathLoaderCampaignStrt);
+      //  Thread.sleep(40000);
+      //  System.out.println("2 "+campaignName);
+        // waitForDOMReady();
+        
+       
+        
+        //assertAndClick(xpathCampaignBtn);
+       // System.out.println("step 19");
+      //  System.out.println("3 "+campaignName);
+      //  pageReady(xpathLoadercreatecampaign);
+      //  pageRefresh();
+      //  System.out.println("step 20");
+      //  WebElement element = findWebElement(xpathTableRows, campaignName);
+     //   System.out.println("4 "+campaignName);
+      //  System.out.println(campaignName +" : "+ element);
+//        
+      //  Assert.assertNotNull(element, "Campaign : " +campaignName+ " not created successfully");
+      //  System.out.println("5 "+campaignName);
+        
+     //   assertAndClick(xpathLogoutBtn);
+        
+        assertAndClick(xpathCampaignBtn);
+        System.out.println("3 "+campaignName);
+        pageReady(xpathLoadercreatecampaign);
+        pageRefresh();
+        WebElement element = findWebElement(xpathTableRows, campaignName);
+        Thread.sleep(6000);
+        System.out.println("4 "+campaignName);
+        System.out.println(campaignName +" : "+ element);
+//        
+        element.findElement(By.className(dashboardClassStart)).click();
+        pageReady("//*[@id=\"spin\"]/div/div/div/div[1]/span");
+        Thread.sleep(10000);
+        System.out.println("5 "+campaignName);
+        
+        assertAndClick(xpathCampaignBtn);
+         System.out.println("step 19");
+         System.out.println("3 "+campaignName);
+         pageReady(xpathLoadercreatecampaign);
+         pageRefresh();
+         System.out.println("step 20");
+         WebElement element2 = findWebElement(xpathTableRows, campaignName);
+         System.out.println("4 "+campaignName);
+         System.out.println(campaignName +" : "+ element);
+         
+         Assert.assertNotNull(element2, "Campaign : " +campaignName+ " not created successfully");
+         System.out.println("5 "+campaignName);
+        assertAndClick(xpathLogoutBtn);
+        System.out.println("logout 5 ");
+        Thread.sleep(15000);
+        
+        }catch(StaleElementReferenceException e) {
+          e.printStackTrace();
+          System.out.println("e "+campaignName);
+//          staleElement = true;
+        }
+      }
+      }
+    
+    public void verifyCreatecampaign() throws InterruptedException {
       
-//      createCampaign.verifyLoginWithoutAssert(correctUsername, correctPassword);
-//      createCampaign.verifyCreatecampaign();
-//      campaignPageDelete.verifyCampaignPageDelete();
+      assertAndClick(xpathCampaignBtn);
+      System.out.println("3 "+campaignName);
+      pageReady(xpathLoadercreatecampaign);
+      pageRefresh();
+      WebElement element = findWebElement(xpathTableRows, campaignName);
+      Thread.sleep(6000);
+      System.out.println("4 "+campaignName);
+      System.out.println(campaignName +" : "+ element);
+//      
+      element.findElement(By.className(dashboardClassStart)).click();
+      pageReady("//*[@id=\"spin\"]/div/div/div/div[1]/span");
+      Thread.sleep(10000);
+      System.out.println("5 "+campaignName);
+      
+      assertAndClick(xpathCampaignBtn);
+       System.out.println("step 19");
+       System.out.println("3 "+campaignName);
+       pageReady(xpathLoadercreatecampaign);
+       pageRefresh();
+       System.out.println("step 20");
+       WebElement element2 = findWebElement(xpathTableRows, campaignName);
+       System.out.println("4 "+campaignName);
+       System.out.println(campaignName +" : "+ element);
+       
+       Assert.assertNotNull(element2, "Campaign : " +campaignName+ " not created successfully");
+       System.out.println("5 "+campaignName);
+      assertAndClick(xpathLogoutBtn);
+      System.out.println("logout 5 ");
+      Thread.sleep(15000);
+    }
+     
+    public void createCamapignAdvanceManageMsg (String campaignname,String campaignurl, String popupurl, String title) throws InterruptedException {
+      
+      assertAndClick(xpathCampaignBtn);
+      pageReady(xpathLoadercreatecampaign);
+      assertAndClick(xpathCreateCampaignBtn, 0);
+      assertAndSendKeys(xpathCampaignName, campaignname, 0);
+      assertAndClick(xpathType);
+      assertAndClick(xpathSelectType, 0);
+      assertAndSendKeys(xpathCampaignUrl, campaignurl);
+      assertAndSendKeys(xpathPopupUrl, popupurl);
+      assertAndSendKeys(xpathTitle, title);
+      assertAndClick(xpathAdvWindow, 0);
+      waitForElementVisible(xpathAdvMsgHeading);
+      assertAndClear(xpathAdvMsgHeading, 0);
+      assertAndSendKeys(xpathAdvMsgHeading, campaignSplashheadingVal);
+      assertAndClear(xpathAdvMsgSubHeading, 0);
+      assertAndSendKeys(xpathAdvMsgSubHeading, campaignSplashSubheadingVal);
+      assertAndClear(xpathEmailHeading, 0);
+      assertAndSendKeys(xpathEmailHeading, campaignEmailboxHeadingVal);
+      assertAndSendKeys(xpathEmailSubHeading, campaignEmailboxSubHeadingVal);
+      assertAndClear(xpathEmailOn, 0);
+      assertAndSendKeys(xpathEmailOn, campaignThanksEmailOn);
+      assertAndClear(xpathEmailOff, 0);
+      assertAndSendKeys(xpathEmailOff, campaignThanksEmailoff);
+      
+      assertAndClick(xpathCreateBtn, 0);
+      pageReady(xpathLoaderCampaign);
+      assertAndClick(xpathStartCampaignBtn, 0);
+      pageReady(xpathLoaderCampaignStrt);
+//      findWebElement(xpathDeleteCampaign, campaignName);
+//      assertAndClick(xpathDeleteBtn);
     }
     
-    @Test (priority = 2, groups= {"regression","smoke"}, description="Create Campaign.")
-    @Severity(SeverityLevel.BLOCKER)
-    @Description("Create Campaign")
-    @Story("Create Campaign")
-    public void campaignStart(Method method) throws InterruptedException {
-      LOGGER.info(method.getName() + " test is starting.");
-      createCampaign.gotoUrl(url);
-      ExtentTestManager.getTest().setDescription("Start Campaign.");
-      LOGGER.info("Trying to login LeadGain.");
-      createCampaign.verifyCreatecampaign();
+ public void createCamapignManageTeaser (String campaignname,String campaignurl, String popupurl, String title) throws InterruptedException {
+   boolean staleElement = true; 
+   while(staleElement){
+     try {
+      assertAndClick(xpathCampaignBtn);
+      pageReady(xpathLoadercreatecampaign);
+      assertAndClick(xpathCreateCampaignBtn, 0);
+      assertAndSendKeys(xpathCampaignName, campaignname, 0);
+      assertAndClick(xpathType);
+      assertAndClick(xpathSelectType, 0);
+      assertAndSendKeys(xpathCampaignUrl, campaignurl);
+      assertAndSendKeys(xpathPopupUrl, popupurl);
+      assertAndSendKeys(xpathTitle, title);
+      assertAndClick(xpathAdvWindow, 0);
       
-//      createCampaign.verifyLoginWithoutAssert(correctUsername, correctPassword);
-//      createCampaign.verifyCreatecampaign();
-//      campaignPageDelete.verifyCampaignPageDelete();
-    }
+      assertAndClick(xpathManageTeaser,0);            
+      waitForElementVisible(xpathPageForSlide);
+      assertAndClear(xpathPageForSlide, 0);
+      assertAndSendKeys(xpathPageForSlide, manageTeaserSlide);
+      assertAndClick(xpathTeaserAddMoreSlide, 0);
+      
+      assertAndClick(xpathManageTeaserPageNewSlide, 0);
+      waitForElementVisible(xpathSlideKeyDown);
+      assertAndClick(xpathSlideKeyDown, 0);
+      
+      assertAndClick(xpathAddNewSlide, 0);
+      
+      assertAndClick(xpathTeaserSlide3, 0);
+      waitForElementVisible(xpathTeaserKeyUp);
+      assertAndClick(xpathTeaserKeyUp, 0);
+      
+      assertAndClick(xpathTeaserSlide4, 0);
+      assertAndClick(xpathTeaserRemoveBtn, 0);
+      
+      Thread.sleep(8000);
+//      assertAndClick(xpathCreateBtn, 0);
+//      pageReady(xpathLoaderCampaign);
+//      assertAndClick(xpathStartCampaignBtn, 0);
+//      pageReady(xpathLoaderCampaignStrt);
+//      findWebElement(xpathDeleteCampaign, campaignName);
+//      assertAndClick(xpathDeleteBtn);
+      staleElement = false;
+     }catch(StaleElementReferenceException e) {
+       staleElement = true;
+     }
+   }
    
-//    @Test (priority = 2, groups= {"regression","smoke"}, description="Create Campaign.")
-//    @Severity(SeverityLevel.BLOCKER)
-//    @Description("Create Campaign")
-//    @Story("Create Campaign")
-//    public void createCamapignAdvManageMsg(Method method) throws InterruptedException {
-//      LOGGER.info(method.getName() + " test is starting.");
-//      createCampaign.gotoUrl(url);
-//      ExtentTestManager.getTest().setDescription("Login test and change password.");
-//      LOGGER.info("Trying to login LeadGain.");
-//      createCampaign.verifyLoginWithoutAssert(correctUsername, correctPassword);
-//      createCampaign.createCamapignAdvanceManageMsg(campaignNameVal, triggerPageUrl, popupContentUrl, existingTitle);
-//     
-//    }
+ }
+ 
+ public void createCamapignManageQuestionCheckbox (String campaignname,String campaignurl, String popupurl, String title) throws InterruptedException {
+   boolean staleElement = true; 
+   while(staleElement){
+     try {
+      assertAndClick(xpathCampaignBtn);
+      pageReady(xpathLoadercreatecampaign);
+      assertAndClick(xpathCreateCampaignBtn, 0);
+      assertAndSendKeys(xpathCampaignName, campaignname, 0);
+      assertAndClick(xpathType);
+      assertAndClick(xpathSelectType, 0);
+      assertAndSendKeys(xpathCampaignUrl, campaignurl);
+      assertAndSendKeys(xpathPopupUrl, popupurl);
+      assertAndSendKeys(xpathTitle, title);
+      waitForElementVisible(xpathAdvWindow);
+      assertAndClick(xpathAdvWindow, 0);
+      waitForElementVisible(xpathTeaserManageQs);
+      assertAndClick(xpathTeaserManageQs, 0);
+      
+      Thread.sleep(8000);
+      
+      waitForElementVisible(xpathTeaserAddQuestionButton);
+      assertAndClick(xpathTeaserAddQuestionButton, 0);            
+      
+      assertAndClick(xpathManageqsQsText, 0);
+      assertAndSendKeys(xpathManageqsQsText, enterQuestion1TextVal);
+      
+      assertAndClick(xpathOption1, 0);
+      assertAndSendKeys(xpathOption1, question1AnswerOption1Val);
+      
+      assertAndClick(xpathOpt2AddOption, 0);
+      
+      assertAndClick(xpathOption2, 0);
+      assertAndSendKeys(xpathOption2, question1AnswerOption2Val);
+      
+      assertAndClick(xpathOpt3AddOption, 0);
+      
+      assertAndClick(xpathOption3, 0);
+      assertAndSendKeys(xpathOption3, question1AnswerOption3Val);
+      
+      assertAndClick(xpathOpt4AddOption, 0);
+      assertAndClick(xpathOpt4DelBtn, 0);
+
+        Thread.sleep(8000);
+//      assertAndClick(xpathCreateBtn, 0);
+//      pageReady(xpathLoaderCampaign);
+//      assertAndClick(xpathStartCampaignBtn, 0);
+//      pageReady(xpathLoaderCampaignStrt);
+//      findWebElement(xpathDeleteCampaign, campaignName);
+//      assertAndClick(xpathDeleteBtn);
+      staleElement = false;
+     }catch(StaleElementReferenceException e) {
+       staleElement = true;
+     }
+   }
+   
+ }
+
+ public void createCamapignManageQuestionRadioBtn (String campaignname,String campaignurl, String popupurl, String title) throws InterruptedException {
+   boolean staleElement = true; 
+   while(staleElement){
+     try {
+      assertAndClick(xpathCampaignBtn);
+      pageReady(xpathLoadercreatecampaign);
+      assertAndClick(xpathCreateCampaignBtn, 0);
+      assertAndSendKeys(xpathCampaignName, campaignname, 0);
+      assertAndClick(xpathType);
+      assertAndClick(xpathSelectType, 0);
+      assertAndSendKeys(xpathCampaignUrl, campaignurl);
+      assertAndSendKeys(xpathPopupUrl, popupurl);
+      assertAndSendKeys(xpathTitle, title);
+      waitForElementVisible(xpathAdvWindow);
+      assertAndClick(xpathAdvWindow, 0);
+      waitForElementVisible(xpathTeaserManageQs);
+      assertAndClick(xpathTeaserManageQs, 0);
+      
+      Thread.sleep(8000);
+      
+      waitForElementVisible(xpathTeaserAddQuestionButton);
+      assertAndClick(xpathTeaserAddQuestionButton, 0);            
+      
+      assertAndClick(xpathSelectQsType, 0);
+      
+      waitForElementVisible(xpathSelectRadioBtn);      
+      assertAndClick(xpathSelectRadioBtn, 0);
+      
+      assertAndClick(xpathManageqsQsText, 0);
+      assertAndSendKeys(xpathManageqsQsText, enterQuestion1TextVal);
+      
+      assertAndClick(xpathOption1, 0);
+      assertAndSendKeys(xpathOption1, question1AnswerOption1Val);
+      
+      assertAndClick(xpathOpt2AddOption, 0);
+      
+      assertAndClick(xpathOption2, 0);
+      assertAndSendKeys(xpathOption2, question1AnswerOption2Val);
+      
+      assertAndClick(xpathOpt3AddOption, 0);
+      
+      assertAndClick(xpathOption3, 0);
+      assertAndSendKeys(xpathOption3, question1AnswerOption3Val);
+      
+      assertAndClick(xpathOpt4AddOption, 0);
+      assertAndClick(xpathOpt4DelBtn, 0);
+
+        Thread.sleep(8000);
+//      assertAndClick(xpathCreateBtn, 0);
+//      pageReady(xpathLoaderCampaign);
+//      assertAndClick(xpathStartCampaignBtn, 0);
+//      pageReady(xpathLoaderCampaignStrt);
+//      findWebElement(xpathDeleteCampaign, campaignName);
+//      assertAndClick(xpathDeleteBtn);
+      staleElement = false;
+     }catch(StaleElementReferenceException e) {
+       staleElement = true;
+     }
+   }
+   
+ }
+ 
+ public void createCamapignAutomationSettings (String campaignname,String campaignurl, String popupurl, String title) throws InterruptedException {
+   boolean staleElement = true; 
+   while(staleElement){
+     try {
+      assertAndClick(xpathCampaignBtn);
+      pageReady(xpathLoadercreatecampaign);
+      assertAndClick(xpathCreateCampaignBtn, 0);
+      assertAndSendKeys(xpathCampaignName, campaignname, 0);
+      assertAndClick(xpathType);
+      assertAndClick(xpathSelectType, 0);
+      assertAndSendKeys(xpathCampaignUrl, campaignurl);
+      assertAndSendKeys(xpathPopupUrl, popupurl);
+      assertAndSendKeys(xpathTitle, title);
+      waitForElementVisible(xpathAdvWindow);
+      assertAndClick(xpathAdvWindow, 0);
+      waitForElementVisible(xpathAdvAutomationSettings);
+      assertAndClick(xpathAdvAutomationSettings, 0);
+      
+      Thread.sleep(3000);
+     
+      waitForElementVisible(xpathLeadQualification);
+      assertAndClick(xpathLeadQualification, 0);            
+      
+           
+    //  waitForElementVisible(xpathMarketingAutomation);      
+    //  assertAndClick(xpathMarketingAutomation, 0);
+   //   
+      waitForElementVisible(xpathInstantMarketingAutomation);
+     // assertAndClick(xpathInstantMarketingAutomation, 0);
+      
+      Thread.sleep(8000);
+//      assertAndClick(xpathCreateBtn, 0);
+//      pageReady(xpathLoaderCampaign);
+//      assertAndClick(xpathStartCampaignBtn, 0);
+//      pageReady(xpathLoaderCampaignStrt);
+//      findWebElement(xpathDeleteCampaign, campaignName);
+//      assertAndClick(xpathDeleteBtn);
+      staleElement = false;
+     }catch(StaleElementReferenceException e) {
+       staleElement = true;
+     }
+   }
+   
+ }
+
     
-//    @Test (priority = 1, groups= {"regression","smoke"}, description="Create Campaign.")
-//    @Severity(SeverityLevel.BLOCKER)
-//    @Description("Create Campaign")
-//    @Story("Create Campaign")
-//    public void createCamapignAdvManageTeaser(Method method) throws InterruptedException {
-//      LOGGER.info(method.getName() + " test is starting.");
-//      createCampaign.gotoUrl(url);
-//      ExtentTestManager.getTest().setDescription("Login test and change password.");
-//      LOGGER.info("Trying to login LeadGain.");
-//      createCampaign.verifyLoginWithoutAssert(correctUsername, correctPassword);
-//      createCampaign.createCamapignManageTeaser(campaignNameVal, triggerPageUrl, popupContentUrl, existingTitle);
-//     
-//    }
-//    
-//    @Test (priority = 1, groups= {"regression","smoke"}, description="Create Campaign.")
-//    @Severity(SeverityLevel.BLOCKER)
-//    @Description("Create Campaign")
-//    @Story("Create Campaign")
-//    public void createCamapignAdvManageQuestionChkbox (Method method) throws InterruptedException {
-//      LOGGER.info(method.getName() + " test is starting.");
-//      createCampaign.gotoUrl(url);
-//      ExtentTestManager.getTest().setDescription("Login test and change password.");
-//      LOGGER.info("Trying to login LeadGain.");
-//      createCampaign.verifyLoginWithoutAssert(correctUsername, correctPassword);
-//      createCampaign.createCamapignManageQuestionCheckbox (campaignNameVal, triggerPageUrl, popupContentUrl, existingTitle);
-//     
-//    }
-//    
-//    @Test (priority = 1, groups= {"regression","smoke"}, description="Create Campaign.")
-//    @Severity(SeverityLevel.BLOCKER)
-//    @Description("Create Campaign")
-//    @Story("Create Campaign")
-//    public void createCamapignAdvManageQuestionRadioBtn (Method method) throws InterruptedException {
-//      LOGGER.info(method.getName() + " test is starting.");
-//      createCampaign.gotoUrl(url);
-//      ExtentTestManager.getTest().setDescription("Login test and change password.");
-//      LOGGER.info("Trying to login LeadGain.");
-//      createCampaign.verifyLoginWithoutAssert(correctUsername, correctPassword);
-//      createCampaign.createCamapignManageQuestionRadioBtn (campaignNameVal, triggerPageUrl, popupContentUrl, existingTitle);
-//     
-//    }
-
-//    @Test (priority = 1, groups= {"regression","smoke"}, description="Create Campaign.")
-//    @Severity(SeverityLevel.BLOCKER)
-//    @Description("Create Campaign")
-//    @Story("Create Campaign")
-//    public void createCamapignAdvAutomationSettings (Method method) throws InterruptedException {
-//      LOGGER.info(method.getName() + " test is starting.");
-//      createCampaign.gotoUrl(url);
-//      ExtentTestManager.getTest().setDescription("Login test and change password.");
-//      LOGGER.info("Trying to login LeadGain.");
-//      createCampaign.verifyLoginWithoutAssert(correctUsername, correctPassword);
-//      createCampaign.createCamapignAutomationSettings (campaignNameVal, triggerPageUrl, popupContentUrl, existingTitle);
-//     
-//    }
-
-
 }
