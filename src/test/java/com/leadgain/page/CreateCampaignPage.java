@@ -298,7 +298,7 @@ public class CreateCampaignPage extends AbstractPage {
         staleElement = false;
         pageReady(xpathLoaderCampaign);
         System.out.println("step 17");
-        Thread.sleep(15000);
+        Thread.sleep(5000);
         
       //  assertAndClick(xpathStartCampaignBtn, 0);
        // System.out.println("step 18");
@@ -325,6 +325,36 @@ public class CreateCampaignPage extends AbstractPage {
         
      //   assertAndClick(xpathLogoutBtn);
         
+        assertAndClick(xpathCampaignBtn);
+        System.out.println("3 "+campaignName);
+        pageReady(xpathLoadercreatecampaign);
+        pageRefresh();
+        WebElement element = findWebElement(xpathTableRows, campaignName);
+        Thread.sleep(6000);
+        System.out.println("4 "+campaignName);
+        System.out.println(campaignName +" : "+ element);
+//        
+        element.findElement(By.className(dashboardClassStart)).click();
+        pageReady("//*[@id=\"spin\"]/div/div/div/div[1]/span");
+        Thread.sleep(10000);
+        System.out.println("5 "+campaignName);
+        
+        assertAndClick(xpathCampaignBtn);
+         System.out.println("step 19");
+         System.out.println("3 "+campaignName);
+         pageReady(xpathLoadercreatecampaign);
+         pageRefresh();
+         System.out.println("step 20");
+         WebElement element2 = findWebElement(xpathTableRows, campaignName);
+         System.out.println("4 "+campaignName);
+         System.out.println(campaignName +" : "+ element);
+         
+         Assert.assertNotNull(element2, "Campaign : " +campaignName+ " not created successfully");
+         System.out.println("5 "+campaignName);
+        assertAndClick(xpathLogoutBtn);
+        System.out.println("logout 5 ");
+        Thread.sleep(15000);
+        
         }catch(StaleElementReferenceException e) {
           e.printStackTrace();
           System.out.println("e "+campaignName);
@@ -347,7 +377,23 @@ public class CreateCampaignPage extends AbstractPage {
       element.findElement(By.className(dashboardClassStart)).click();
       pageReady("//*[@id=\"spin\"]/div/div/div/div[1]/span");
       Thread.sleep(10000);
+      System.out.println("5 "+campaignName);
+      
+      assertAndClick(xpathCampaignBtn);
+       System.out.println("step 19");
+       System.out.println("3 "+campaignName);
+       pageReady(xpathLoadercreatecampaign);
+       pageRefresh();
+       System.out.println("step 20");
+       WebElement element2 = findWebElement(xpathTableRows, campaignName);
+       System.out.println("4 "+campaignName);
+       System.out.println(campaignName +" : "+ element);
+       
+       Assert.assertNotNull(element2, "Campaign : " +campaignName+ " not created successfully");
+       System.out.println("5 "+campaignName);
       assertAndClick(xpathLogoutBtn);
+      System.out.println("logout 5 ");
+      Thread.sleep(15000);
     }
      
     public void createCamapignAdvanceManageMsg (String campaignname,String campaignurl, String popupurl, String title) throws InterruptedException {
