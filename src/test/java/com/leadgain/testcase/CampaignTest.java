@@ -22,7 +22,7 @@ public class CampaignTest extends BaseClassTest {
   String correctPassword;
   
   @Value("#{'${select.campaign.name}'}")
-  private String campaignName;
+  private String CampaignName;
   
   @Autowired
   private   LoginPage loginPage;
@@ -38,7 +38,7 @@ public class CampaignTest extends BaseClassTest {
     LOGGER.info(method.getName() + " test is starting.");
     loginPage.gotoUrl(url);
     loginPage.verifyLoginWithoutAssert(correctUsername, correctPassword);
-    campaignPage.verifyCampaignPresent(campaignName);
+    campaignPage.verifyCampaignPresent(CampaignName);
    
   }
   
@@ -49,19 +49,19 @@ public class CampaignTest extends BaseClassTest {
   public void verifyCampaignIsRunningAndChangeState(Method method) throws InterruptedException {
     LOGGER.info(method.getName() + " test is starting.");
     campaignPage.goToCampaignMenu();
-    campaignPage.verifyCampaignState(campaignName, "Running");
-    campaignPage.changeCampaignState(campaignName, "Running");
+    campaignPage.verifyCampaignState(CampaignName, "Running");
+    campaignPage.changeCampaignState(CampaignName, "Running");
   }
   
-  @Test (priority = 3, groups= {"regression","smoke"}, description="Check campaign state stopped")
-  @Severity(SeverityLevel.MINOR)
-  @Description("Test Description: Check campaign is stopped")
-  @Story("Check campaign is stopped")
-  public void verifyCampaignIsStopped(Method method) throws InterruptedException {
-    LOGGER.info(method.getName() + " test is starting.");
-    System.out.println("verifyCampaignIsStopped::");
-    campaignPage.verifyCampaignState(campaignName, "Stopped");
-    campaignPage.changeCampaignState(campaignName, "Stopped");
+ // @Test (priority = 3, groups= {"regression","smoke"}, description="Check campaign state stopped")
+  //@Severity(SeverityLevel.MINOR)
+ // @Description("Test Description: Check campaign is stopped")
+ // @Story("Check campaign is stopped")
+  //public void verifyCampaignIsStopped(Method method) throws InterruptedException {
+  //  LOGGER.info(method.getName() + " test is starting.");
+   // System.out.println("verifyCampaignIsStopped::");
+   // campaignPage.verifyCampaignState(campaignName, "Stopped");
+   // campaignPage.changeCampaignState(campaignName, "Stopped");
 
   }
 }

@@ -78,10 +78,10 @@ public class CampaignPage extends AbstractPage{
      verifyCampaignState(campaignName, state);
      WebElement element=findWebElement(xpathTableRows, campaignName);
     // pageReady(xpathLoaderPauseCampaign);
-     if(state.equalsIgnoreCase("Running")) {
+     if(state.equalsIgnoreCase("Stopped")) {
       element.findElement(By.className("anticon-pause-circle")).click();
       
-     }else if(state.equalsIgnoreCase("Stopped")) {
+     }else if(state.equalsIgnoreCase("Running")) {
        element.findElement(By.className("anticon-play-circle")).click();
        
      }
