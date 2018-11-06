@@ -80,10 +80,11 @@ public class AbstractPage<T> {
     
     
     public void assertAndSendKeys(String locator, String text) {
-
+        System.out.println("inside 1");
         assertElementPresentByXpath(locator);
+        System.out.println("inside 2");
         webDriver.findElement(By.xpath(locator)).sendKeys(text);
-
+        System.out.println("inside 3");
     }
     
     public void assertAndSendKeys(String locator, String text, int index) {
@@ -114,7 +115,7 @@ public class AbstractPage<T> {
 
 
     public void assertElementPresentByXpath(String locator) {
-        LOGGER.info("# Verifying element IS present.");
+        LOGGER.info("# Verifying element IS present." + locator);
         Assert.assertTrue(isElementPresent(locator), "Element " + locator + " NOT found.");
     }
 
@@ -158,6 +159,12 @@ public class AbstractPage<T> {
         new WebDriverWait(webDriver, webdriverWait)
                 .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
     }
+    
+    public void waitForElementVisibleById(String id) {
+      System.out.println("vis by id");
+      new WebDriverWait(webDriver, webdriverWait)
+              .until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
+  }
     
     public void waitForElementClickable(String locator) {
       new WebDriverWait(webDriver, webdriverWait)
@@ -241,12 +248,14 @@ public class AbstractPage<T> {
           waitForElementClickable(locator);
 //          elements.get(arrayIndex).getLocation().
 //          new Actions(webDriver).moveToElement(elements.get(arrayIndex)).moveByOffset(0 , -100).click().perform();
+          System.out.println("Hemal :: found 1");
           elements.get(arrayIndex).click();
+          System.out.println("Hemal :: found 2");
     }
     
     public void assertAndClickByCss(String cssClass) {
-      System.out.println("Hemal :: found");
-      webDriver.findElement(By.cssSelector(cssClass)).click();;
+      System.out.println("Hemal ::"+cssClass);
+      webDriver.findElement(By.cssSelector(cssClass)).click();
     }
     
     public void assertAndClear(String locator, int arrayIndex) {
@@ -277,8 +286,11 @@ public class AbstractPage<T> {
     
     public void windowFocus(String locator){
       assertElementPresentByXpath(locator);
+      System.out.println("xpath");
        webDriver.switchTo().frame(webDriver.findElement(By.xpath(locator)));
+       System.out.println("xpath 2");
       ((JavascriptExecutor) webDriver).executeScript("window.focus();");
+      System.out.println("xpath 3");
       /* String currentWindow = webDriver.getWindowHandle();
        webDriver.switchTo().window(currentWindow);*/
     }
@@ -348,15 +360,44 @@ public class AbstractPage<T> {
     public void pageRefresh() {
       webDriver.navigate().refresh();
     }
-	
+    
 	public void waitForElementVisible(String locator, int waitTimeInSec) {
       new WebDriverWait(webDriver, waitTimeInSec)
               .until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
     }
+	
+	public void waitForElementClickable(String locator, int waitTimeInSec) {
+      new WebDriverWait(webDriver, waitTimeInSec)
+              .until(ExpectedConditions.elementToBeClickable(By.xpath(locator)));
+    }
+	
+	public void assertAndClickById(String id, int arrayIndex) {
+      List<WebElement> elements = webDriver.findElements(By.id(id));
+      System.out.println("Hemal 1::"+elements.get(arrayIndex));
+      try {
+        Thread.sleep(15000);
+      } catch (InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      elements.get(arrayIndex).click();
+      System.out.println("Hemal 1:: found 2");
+}
 	
 	public void assertAndClickByScript(String locator) {
       assertElementPresentByXpath(locator);
       JavascriptExecutor executor = (JavascriptExecutor)webDriver;
       executor.executeScript("arguments[0].click()", webDriver.findElement(By.xpath(locator)));
     }
+	
+	 public void assertAndSendKeysByID(String id, String text) {
+
+	   System.out.println("inside id 1");
+//	   waitForElementVisibleById(id);
+//       webDriver.findElement(By.id(id)).sendKeys(text);
+       JavascriptExecutor executor = (JavascriptExecutor)webDriver;
+       executor.executeScript("arguments[0].value='"+text+"'", webDriver.findElement(By.id(id)));
+       System.out.println("inside id 2");
+
+	  }
 }

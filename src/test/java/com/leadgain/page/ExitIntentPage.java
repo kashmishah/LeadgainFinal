@@ -22,8 +22,11 @@ public class ExitIntentPage extends AbstractPage {
   @Value("#{'${xpath.downloadbtn}'}")
   private String xpathDownloadBtn;
   
-  @Value("#{'${xpath.emailfield}'}")
-  private String xpathEmailField;
+  /*@Value("#{'${xpath.emailfield}'}")
+  private String xpathEmailField;*/
+  
+  @Value("#{'${id.emailfield}'}")
+  private String idEmailField;
   
   @Value("#{'${xpath.imintrestedbtn}'}")
   private String xpathImIntretsedBtn;
@@ -65,24 +68,30 @@ public class ExitIntentPage extends AbstractPage {
        waitForDOMReady();*/
       windowFocus(xpathIframe);
       System.out.println("before click");
-//      waitForElementInVisible(xpathInitLoaderDiv);
-//      pageReady(xpathDownloadBtn);
-      assertAndClick(xpathDownloadBtn);
+//	  waitForElementInVisible(xpathInitLoaderDiv); 
+	  System.out.println("before click 1");
+//	  waitForElementClickable(xpathDownloadBtn, 60 );
+	  System.out.println("before click 2");
+	  Thread.sleep(15000);
+	  assertAndClickByScript(xpathDownloadBtn);
+	// assertAndClickById("leadgain-downloadButton",0);
       System.out.println("after click");
       System.out.println("after focus:");
     }
     
     public void verifyAndSubmitEmail(String emailval) throws InterruptedException {
-      ///assertAndClick(xpathDownlaodBtn, 0);
-      assertAndSendKeys(xpathEmailField, emailval);
-      assertAndClick(xpathImIntretsedBtn);
+//      windowFocus(xpathIframe);
+      
+      assertAndSendKeysByID(idEmailField, emailval);
+      assertAndClickByScript(xpathImIntretsedBtn);
+     // assertAndClick(xpathImIntretsedBtn);
       
     }
   
     public void veifyScrollPagePdf() {
       // TODO Auto-generated method stub
       System.out.println("before find");
-      waitForElementVisible(xpathPdfLoader);
+     // waitForElementVisible(xpathPdfLoader);
      // waitForElementInVisible(xpathPdfLoader);
       System.out.println("after found");
       scrollPage(5);
