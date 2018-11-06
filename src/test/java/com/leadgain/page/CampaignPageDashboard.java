@@ -54,7 +54,10 @@ public class CampaignPageDashboard extends AbstractPage{
       e.printStackTrace();
     }
 	 System.out.println("d6 "+CampaignName);
-    
+    waitForElementVisible(xpathVisitor, 50);
+	
+	
+	
 	//waitForElementVisible(xpathVisitor);
     int VisitorCount= assertAndClickGetText(xpathVisitor, 0);
     System.out.println("Total Visitor:"+VisitorCount);
