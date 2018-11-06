@@ -44,8 +44,8 @@ public class CampaignPageDashboard extends AbstractPage{
     System.out.println("d3 "+CampaignName);
     WebElement element = findWebElement(xpathTableRows, CampaignName);
     System.out.println("d4 "+CampaignName);
-    element.findElement(By.className(dashboardClass)).click();
-    System.out.println("d5 "+CampaignName);
+  //  element.findElement(By.className(dashboardClass)).click();
+  //  System.out.println("d5 "+CampaignName);
     
     try {
       Thread.sleep(10000);
