@@ -73,21 +73,21 @@ public class CreateCampaignTest extends BaseClassTest {
 //      campaignPageDelete.verifyCampaignPageDelete();
     }
     
-    @Test (priority = 2, groups= {"regression","smoke"}, description="Create Campaign.")
-    @Severity(SeverityLevel.BLOCKER)
-    @Description("Create Campaign")
-    @Story("Create Campaign")
-    public void campaignStart(Method method) throws InterruptedException {
-      LOGGER.info(method.getName() + " test is starting.");
-      createCampaign.gotoUrl(url);
-      ExtentTestManager.getTest().setDescription("Start Campaign.");
-      LOGGER.info("Trying to login LeadGain.");
-      createCampaign.verifyCreatecampaign();
-      
+//    @Test (priority = 2, groups= {"regression","smoke"}, description="Create Campaign.")
+//    @Severity(SeverityLevel.BLOCKER)
+//    @Description("Create Campaign")
+//    @Story("Create Campaign")
+//    public void campaignStart(Method method) throws InterruptedException {
+//      LOGGER.info(method.getName() + " test is starting.");
+//      createCampaign.gotoUrl(url);
+//      ExtentTestManager.getTest().setDescription("Start Campaign.");
+//      LOGGER.info("Trying to login LeadGain.");
+//      createCampaign.verifyCreatecampaign();
+//      
 //      createCampaign.verifyLoginWithoutAssert(correctUsername, correctPassword);
 //      createCampaign.verifyCreatecampaign();
 //      campaignPageDelete.verifyCampaignPageDelete();
-    }
+//    }
    
 //    @Test (priority = 2, groups= {"regression","smoke"}, description="Create Campaign.")
 //    @Severity(SeverityLevel.BLOCKER)
