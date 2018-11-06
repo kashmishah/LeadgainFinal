@@ -44,8 +44,8 @@ public class CampaignPageDashboard extends AbstractPage{
     System.out.println("d3 "+CampaignName);
     WebElement element = findWebElement(xpathTableRows, CampaignName);
     System.out.println("d4 "+CampaignName);
-  //  element.findElement(By.className(dashboardClass)).click();
-  //  System.out.println("d5 "+CampaignName);
+   element.findElement(By.className(dashboardClass)).click();
+   System.out.println("d5 "+CampaignName);
     
     try {
       Thread.sleep(10000);
@@ -54,21 +54,21 @@ public class CampaignPageDashboard extends AbstractPage{
       e.printStackTrace();
     }
 	 System.out.println("d6 "+CampaignName);
-   // waitForElementVisible(xpathVisitor, 50);
+    waitForElementVisible(xpathVisitor, 50);
 	
 	
 	
-	//waitForElementVisible(xpathVisitor);
-   // int VisitorCount= assertAndClickGetText(xpathVisitor, 0);
-   // System.out.println("Total Visitor:"+VisitorCount);
+	waitForElementVisible(xpathVisitor);
+    int VisitorCount= assertAndClickGetText(xpathVisitor, 0);
+    System.out.println("Total Visitor:"+VisitorCount);
     
-   // int exitIntentCount= assertAndClickGetText(xpathExitintentCount, 0);
-   // System.out.println("Total ExitIntent Count:"+exitIntentCount);
+    int exitIntentCount= assertAndClickGetText(xpathExitintentCount, 0);
+    System.out.println("Total ExitIntent Count:"+exitIntentCount);
     
-   // int leadCount= assertAndClickGetText(xpathLeadsgenCount, 0);
-   // System.out.println("Total Lead Count:"+ leadCount);
+    int leadCount= assertAndClickGetText(xpathLeadsgenCount, 0);
+    System.out.println("Total Lead Count:"+ leadCount);
     
-   // Assert.assertTrue(VisitorCount>=exitIntentCount && exitIntentCount >=leadCount, "Visitor count should be greater than exit intent count and lead count");
+    Assert.assertTrue(VisitorCount>=exitIntentCount && exitIntentCount >=leadCount, "Visitor count should be greater than exit intent count and lead count");
     assertAndClick(xpathLogoutBtn);
   
   }
