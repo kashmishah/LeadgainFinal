@@ -330,7 +330,7 @@ public class CreateCampaignPage extends AbstractPage {
         pageReady(xpathLoadercreatecampaign);
         pageRefresh();
         WebElement element = findWebElement(xpathTableRows, campaignName);
-        Thread.sleep(6000);
+        Thread.sleep(15000);
         System.out.println("4 "+campaignName);
         System.out.println(campaignName +" : "+ element);
 //        
